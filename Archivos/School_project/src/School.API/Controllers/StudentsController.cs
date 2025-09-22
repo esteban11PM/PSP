@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
-[Route("api/students")]
+[Route("api/alumnos")]
 public class StudentsController : ControllerBase
 {
     private readonly SchoolDbContext _db;
@@ -96,7 +96,7 @@ public class StudentsController : ControllerBase
         return NoContent();
     }
 
-    [HttpGet("transcript")]
+    [HttpGet("certificado")]
     public async Task<IActionResult> Transcript([FromQuery] int studentId, [FromQuery] int periodId)
     {
         var mats = await _db.Enrollments.AsNoTracking()

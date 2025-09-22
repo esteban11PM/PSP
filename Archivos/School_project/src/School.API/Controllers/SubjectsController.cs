@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
-[Route("api/subjects")]
+[Route("api/materias")]
 public class SubjectsController : ControllerBase
 {
     private readonly SchoolDbContext _db;

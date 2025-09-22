@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
-[Route("api/assessment-types")]
+[Route("api/tipos-evaluacion")]
 public class AssessmentTypesController : ControllerBase
 {
     private readonly SchoolDbContext _db;
@@ -17,7 +17,7 @@ public class AssessmentTypesController : ControllerBase
     }
 
     // LISTAR rubros de una oferta
-    [HttpGet("by-offering/{offeringId:int}")]
+    [HttpGet("por-oferta/{offeringId:int}")]
     public async Task<IActionResult> ByOffering(int offeringId, CancellationToken ct = default)
     {
         var items = await _db.AssessmentTypes.AsNoTracking()

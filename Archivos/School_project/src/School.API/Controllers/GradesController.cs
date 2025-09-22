@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
-[Route("api/grades")]
+[Route("api/notas")]
 public class GradesController : ControllerBase
 {
     private readonly SchoolDbContext _db;
@@ -18,15 +18,16 @@ public class GradesController : ControllerBase
     }
 
     // LISTAR notas por matrícula
-    [HttpGet("by-enrollment/{enrollmentId:int}")]
+    [HttpGet("por-matricula/{enrollmentId:int}")]
     public async Task<IActionResult> ByEnrollment(int enrollmentId, CancellationToken ct = default)
     {
         var items = await _db.Grades.AsNoTracking()
             .Include(g => g.AssessmentType)
+            .Include(g => g.Enrollment).ThenInclude(e => e.Student)
             .Where(g => g.EnrollmentId == enrollmentId)
             .Select(g => new GradeResponseDTO(
                 g.Id,
-                "", // opcional: nombre estudiante si lo necesitas
+                g.Enrollment.Student.FirstName + " " + g.Enrollment.Student.LastName,
                 g.AssessmentType.Name,
                 g.Score,
                 g.GradedAt))

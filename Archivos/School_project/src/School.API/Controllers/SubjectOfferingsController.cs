@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
-[Route("api/subject-offerings")]
+[Route("api/ofertas-materias")]
 public class SubjectOfferingsController : ControllerBase
 {
     private readonly SchoolDbContext _db;
@@ -118,7 +118,7 @@ public class SubjectOfferingsController : ControllerBase
     }
 
     // CERRAR oferta (valida suma de pesos, recalcula definitivas)
-    [HttpPost("{id:int}/close")]
+    [HttpPost("{id:int}/cerrar")]
     public async Task<IActionResult> Close(int id)
     {
         await _svc.CloseAsync(id);
@@ -126,7 +126,7 @@ public class SubjectOfferingsController : ControllerBase
     }
 
     // RESUMEN (rubros, inscritos, promedio grupo)
-    [HttpGet("{id:int}/summary")]
+    [HttpGet("{id:int}/resumen")]
     public async Task<IActionResult> Summary(int id, CancellationToken ct = default)
     {
         var o = await _db.SubjectOfferings

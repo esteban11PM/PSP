@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
-[Route("api/enrollments")]
+[Route("api/matriculas")]
 public class EnrollmentsController : ControllerBase
 {
     private readonly SchoolDbContext _db;
@@ -24,7 +24,7 @@ public class EnrollmentsController : ControllerBase
         => Ok(await _svc.EnrollAsync(dto));
 
     // LISTAR por offering
-    [HttpGet("by-offering/{offeringId:int}")]
+    [HttpGet("por-oferta/{offeringId:int}")]
     public async Task<ActionResult<PagedResult<EnrollmentResponseDTO>>> ByOffering(
         int offeringId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
@@ -48,7 +48,7 @@ public class EnrollmentsController : ControllerBase
     }
 
     // LISTAR por estudiante (+ filtro periodo)
-    [HttpGet("by-student/{studentId:int}")]
+    [HttpGet("por-estudiante/{studentId:int}")]
     public async Task<IActionResult> ByStudent(int studentId, [FromQuery] int? periodId, CancellationToken ct = default)
     {
         var q = _db.Enrollments.AsNoTracking()
@@ -72,7 +72,7 @@ public class EnrollmentsController : ControllerBase
     }
 
     // RECALCULAR definitiva puntual
-    [HttpPost("{id:int}/recalculate")]
+    [HttpPost("{id:int}/recalcular")]
     public async Task<IActionResult> Recalculate(int id)
     {
         await _svc.RecalculateFinalAverageAsync(id);

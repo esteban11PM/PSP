@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
-[Route("api/periods")]
+[Route("api/periodos")]
 public class PeriodsController : ControllerBase
 {
     private readonly SchoolDbContext _db;
